@@ -1,3 +1,5 @@
+[![Laravel](https://github.com/GaiPalyan/Future_test/actions/workflows/laravel.yml/badge.svg)](https://github.com/GaiPalyan/Future_test/actions/workflows/laravel.yml)
+
 ### Тестовое задание в компанию Future на позицию PHP-developer.
 
 #### Описание
