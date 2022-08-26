@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Person;
 
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PersonRequest extends FormRequest
@@ -24,6 +23,9 @@ class PersonRequest extends FormRequest
         return true;
     }
 
+    /**
+     * Active validation rules
+     */
     public function rules(): array
     {
         $additionalRules = [
@@ -38,6 +40,9 @@ class PersonRequest extends FormRequest
         return $this->rules;
     }
 
+    /**
+     * Return {parent} data transfer object
+     */
     public function getDto(): RequestData
     {
         return new RequestData(
@@ -51,6 +56,9 @@ class PersonRequest extends FormRequest
         );
     }
 
+    /**
+     * Set rules if current route is person.store
+     */
     private function setRules($additionalRules)
     {
         foreach ($additionalRules as $ruleName => $ruleValue) {

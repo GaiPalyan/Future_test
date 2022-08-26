@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace App\View\Transformers;
 
 use App\Models\Person;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class NotebookTransformer
 {
+    /**
+     * Transform {person} into specified structure
+     */
     public static function transform(Person $person): array
     {
         return array_merge($person->only('id', 'full_name', 'photo', 'birthday'), [
@@ -17,8 +21,14 @@ class NotebookTransformer
         ]);
     }
 
+    /**
+     * Transform {person}'s collection inti specified structure
+     *
+     * @param LengthAwarePaginator $list
+     */
     public static function transformCollection($list): array
     {
+
         $collection = [];
         foreach ($list->getCollection() as $person) {
             $collection[] = self::transform($person);

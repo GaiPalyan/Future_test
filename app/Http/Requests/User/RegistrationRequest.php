@@ -22,6 +22,9 @@ class RegistrationRequest extends FormRequest
         ];
     }
 
+    /**
+     * Return registration data transfer object
+     */
     public function getInputData(): RegistrationData
     {
         return new RegistrationData(

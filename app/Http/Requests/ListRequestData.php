@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
+/**
+ * Query params DTO class
+ */
 class ListRequestData
 {
     private const DEFAULT_PAGE = 1;
