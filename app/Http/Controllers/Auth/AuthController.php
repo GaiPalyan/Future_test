@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use App\Domain\User\UserManager;
+use App\Http\Controllers\Api\Controller;
 use App\Http\Requests\User\LoginRequest;
 use App\Http\Requests\User\RegistrationRequest;
 use Illuminate\Http\JsonResponse;

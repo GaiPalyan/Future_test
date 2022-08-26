@@ -31,8 +31,8 @@ class ListRequest extends FormRequest
     public function getListRequestParams(): ListRequestData
     {
         return new ListRequestData(
-            (int) $this->input('page'),
-            (int) $this->input('perPage'),
+            $this->input('page'),
+            $this->input('perPage'),
         );
     }
 }

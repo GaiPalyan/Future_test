@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Domain\Company\CompanyRepositoryInterface;
+use App\Domain\Person\CompanyRepositoryInterface;
 use App\Repositories\Company\CompanyRepository;
 use Illuminate\Support\ServiceProvider;
 

@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -15,11 +18,12 @@ class PersonFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'full_name' => fake()->name,
             'company_id' => Company::factory(),
+            'created_by' => User::factory(),
             'birthday' => fake()->date,
             'photo' => fake()->filePath()
         ];

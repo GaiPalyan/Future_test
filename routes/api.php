@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\NotebookController;
+use App\Http\Controllers\Api\NotebookController;
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,15 +25,19 @@ Route::post('/v1/login', [AuthController::class, 'logIn'])->name('login');
 /*
  * protected routs
  */
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::group([
+    'prefix' => 'v1',
+    'as' => 'api.',
+    'middleware' => ['auth:sanctum']
+],function () {
 
-    Route::get('/v1/notebook/', [NotebookController::class, 'index'])->name('index');
-    Route::post('/v1/notebook/', [NotebookController::class, 'store'])->name('person.store');
-    Route::get('/v1/notebook/{person}', [NotebookController::class, 'show'])->name('person.show');
-    Route::post('/v1/notebook/{person}', [NotebookController::class, 'update'])->name('person.update');
-    Route::delete('/v1/notebook/{person}', [NotebookController::class, 'delete'])->name('person.delete');
+    Route::get('/notebook', [NotebookController::class, 'index'])->name('index');
+    Route::post('/notebook', [NotebookController::class, 'store'])->name('person.store');
+    Route::get('/notebook/{person}', [NotebookController::class, 'show'])->name('person.show');
+    Route::post('/notebook/{person}', [NotebookController::class, 'update'])->name('person.update');
+    Route::delete('/notebook/{person}', [NotebookController::class, 'destroy'])->name('person.delete');
 
-    Route::post('/v1/logout', [AuthController::class, 'logOut'])->name('logout');
+    Route::post('/logout', [AuthController::class, 'logOut'])->name('logout');
 });
 
 

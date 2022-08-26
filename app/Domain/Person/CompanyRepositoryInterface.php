@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Domain\Company;
+namespace App\Domain\Person;
 
 use App\Models\Company;
 
 interface CompanyRepositoryInterface
 {
     public function save(string $companyName): Company;
-    public function getCompany(string $value): ?Company;
 }

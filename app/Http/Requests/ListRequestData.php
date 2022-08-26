@@ -25,6 +25,6 @@ class ListRequestData
 
     public function getPerPage(): int
     {
-        return  $this->perPage;
+        return $this->perPage;
     }
 }

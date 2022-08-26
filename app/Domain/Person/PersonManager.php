@@ -1,26 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Person;
 
 use App\Http\Requests\ListRequestData;
 use App\Http\Requests\Person\RequestData;
-use App\Models\Company;
-use App\Models\Contact;
 use App\Models\Person;
-use App\Models\User;
 
 class PersonManager
 {
     private PersonRepositoryInterface $personRepository;
-    private ContactRepositoryInterface $contactRepository;
+    private CompanyRepositoryInterface $companyRepository;
 
     public function __construct(
         PersonRepositoryInterface $personRepository,
-        ContactRepositoryInterface $contactRepository,
+        CompanyRepositoryInterface $companyRepository,
     )
     {
+        $this->companyRepository = $companyRepository;
         $this->personRepository = $personRepository;
-        $this->contactRepository = $contactRepository;
     }
 
     public function getList(ListRequestData $queryParamDto)
@@ -33,24 +32,34 @@ class PersonManager
         return $this->personRepository->get($person);
     }
 
-    public function savePerson(RequestData $personDto, Company $company = null): Person
+    public function savePerson(RequestData $personDto): Person
     {
+        $companyName = $personDto->getCompany();
+
+        if (!$companyName) {
+            return $this->personRepository->save($personDto);
+        }
+
+        $company = $this->companyRepository->save($companyName);
+
         return $this->personRepository->save($personDto, $company);
-    }
-
-    public function savePersonWithRelatedEntities(RequestData $personDto, Company $company = null): Person
-    {
-        $person = $this->savePerson($personDto, $company);
-        $this->contactRepository->save($personDto, $person);
-
-        return $person;
     }
 
     public function updatePerson(RequestData $personDto, Person $person): Person
     {
-        $person = $this->personRepository->update($personDto, $person);
-        $this->contactRepository->save($personDto, $person);
+        $companyName = $personDto->getCompany();
 
-        return $person;
+        if (!$companyName) {
+            return $this->personRepository->update($personDto, $person);
+        }
+
+        $company = $this->companyRepository->save($companyName);
+
+        return $this->personRepository->update($personDto, $person, $company);
+    }
+
+    public function deletePerson(Person $person): void
+    {
+        $this->personRepository->delete($person);
     }
 }

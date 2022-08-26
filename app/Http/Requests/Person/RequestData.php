@@ -9,51 +9,51 @@ use Illuminate\Http\UploadedFile;
 
 class RequestData
 {
-    private User $createdBy;
-    private string $fullName;
-    private string $phoneNumber;
-    private string $email;
-    private ?string $company;
+    private User $created_by;
+    private ?string $full_name;
+    private ?string $phone_number;
+    private ?string $email;
+    private ?string $company_name;
     private ?string $birthday;
     private ?UploadedFile $photo;
 
     public function __construct(
         User $createdBy,
-        string $fullName,
-        string $email,
-        string $phone_number,
-        ?string $company,
+        ?string $fullName,
+        ?string $email,
+        ?string $phoneNumber,
+        ?string $companyName,
         ?string $birthday,
         ?UploadedFile $photo,
     )
     {
-        $this->createdBy = $createdBy;
-        $this->fullName = $fullName;
+        $this->created_by = $createdBy;
+        $this->full_name = $fullName;
         $this->email = $email;
-        $this->phoneNumber = $phone_number;
-        $this->company = $company;
+        $this->phone_number = $phoneNumber;
+        $this->company_name = $companyName;
         $this->birthday = $birthday;
         $this->photo = $photo;
     }
 
-    public function getFullName(): string
+    public function getFullName(): ?string
     {
-        return $this->fullName;
+        return $this->full_name;
     }
 
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function getPhoneNumber(): string
+    public function getPhoneNumber(): ?string
     {
-        return $this->phoneNumber;
+        return $this->phone_number;
     }
 
     public function getCompany(): ?string
     {
-        return $this->company;
+        return $this->company_name;
     }
 
     public function getBirthday(): ?string
@@ -68,10 +68,11 @@ class RequestData
 
     public function getCreator(): User
     {
-        return $this->createdBy;
+        return $this->created_by;
     }
-    public function toArray(): array
+
+    public function getFilled(): array
     {
-        return get_object_vars($this);
+        return collect(get_object_vars($this))->filter()->except(['created_by'])->toArray();
     }
 }
