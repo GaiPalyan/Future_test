@@ -7,6 +7,9 @@ namespace App\Http\Requests\Person;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 
+/**
+ * Request DTO class
+ */
 class RequestData
 {
     private User $created_by;
@@ -71,6 +74,9 @@ class RequestData
         return $this->created_by;
     }
 
+    /**
+     * Return only filled (not null) input values
+     */
     public function getFilled(): array
     {
         return collect(get_object_vars($this))->filter()->except(['created_by'])->toArray();

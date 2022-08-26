@@ -28,6 +28,9 @@ class ListRequest extends FormRequest
         ];
     }
 
+    /**
+     * Return query params data transfer object
+     */
     public function getListRequestParams(): ListRequestData
     {
         return new ListRequestData(

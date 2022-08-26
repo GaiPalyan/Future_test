@@ -81,6 +81,9 @@ class PersonRepository implements PersonRepositoryInterface
         ]);
     }
 
+    /*
+     * Store unique name files in storage
+     */
     private function storePhoto(RequestData $personDto, Person $person): Person
     {
         if (!$personDto->getPhoto()) {

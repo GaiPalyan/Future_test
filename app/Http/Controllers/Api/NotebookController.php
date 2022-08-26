@@ -14,6 +14,10 @@ use Illuminate\Http\JsonResponse;
 
 class NotebookController extends Controller
 {
+    /**
+     * Domain class
+     * @var PersonManager
+     */
     private PersonManager $personManager;
 
     public function __construct(PersonManager $personManager)

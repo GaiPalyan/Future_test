@@ -32,6 +32,9 @@ class PersonManager
         return $this->personRepository->get($person);
     }
 
+    /**
+     * Check if company exist before create
+     */
     public function savePerson(RequestData $personDto): Person
     {
         $companyName = $personDto->getCompany();
@@ -45,6 +48,9 @@ class PersonManager
         return $this->personRepository->save($personDto, $company);
     }
 
+    /**
+     * Check if company exist before update
+     */
     public function updatePerson(RequestData $personDto, Person $person): Person
     {
         $companyName = $personDto->getCompany();
